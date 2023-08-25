@@ -1,70 +1,87 @@
 
+int pin = 2;
+bool buttonPressed = false;
 
-// the setup function runs once when you press reset or power the board
 void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
   pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(pin, INPUT_PULLUP); // Configure pin as input with internal pull-up resistor
 }
 
-void dot(){
+void dot() {
   digitalWrite(LED_BUILTIN, HIGH);
   delay(200);
   digitalWrite(LED_BUILTIN, LOW);
   delay(200);
 }
 
-
-void dash(){
+void dash() {
   digitalWrite(LED_BUILTIN, HIGH);
   delay(600);
   digitalWrite(LED_BUILTIN, LOW);
   delay(900);
 }
 
-void loop(){
-   // Name: Ridhima
-   // Morse code: .-. .. -.. .... .. -- .-
+void loop() {
+  if (digitalRead(pin) == LOW) { // Check if button is pressed
+    buttonPressed = true;
+  }
 
-   // led blink for R
-   dot();
-   dash();
-   dot();
-   delay(2000);
+  if (buttonPressed) {
+    // Restart the sequence
+    // Name: Ridhima
+    // Morse code: .-. .. -.. .... .. -- .-
+    
+    // led blink for R
+    dot();
+    dash();
+    dot();
+    delay(2000);
+    Serial.print("R");
 
+    // led blink for I 
+    dot();
+    dot();
+    delay(2000);
+    Serial.print("I");
 
-   // led blink for I 
-   dot();
-   dot();
-   delay(2000);
+    // led blink for D
+    dash();
+    dot();
+    dot();
+    delay(2000);
+    Serial.print("D");
 
-   // led blink for D
-   dash();
-   dot();
-   dot();
-   delay(2000);
+    // led blink for H
+    dot();
+    dot();
+    dot();
+    dot();
+    delay(2000);
+    Serial.print("H");
 
-   // led blink for H
-   dot();
-   dot();
-   dot();
-   dot();
-   delay(2000);
+    // led blink for I
+    dot();
+    dot();
+    delay(2000);
+    Serial.print("I");
 
-   // led blink for I
-   dot();
-   dot();
-   delay(2000);
+    //led blink for M
+    dash();
+    dash();
+    delay(2000);
+    Serial.print("M");
 
-   //led blink for M
-   dash();
-   dash();
-   delay(2000);
-
-   //led blink for A
-   dot();
-   dash();
-   delay(20000);
+    //led blink for A
+    dot();
+    dash();
+    Serial.print("A");
+    buttonPressed = false; // Reset buttonPressed flag
+  }
 }
+
+
+
+
 
 
 
